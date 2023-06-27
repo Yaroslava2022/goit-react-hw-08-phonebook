@@ -6,3 +6,12 @@
     font-size: 40;
     color: #010101;
   }
+
+  .container {
+    margin-left: 30px;
+    
+  }
+  body {
+    background-color: blanchedalmond;
+    color: brown;
+  }
