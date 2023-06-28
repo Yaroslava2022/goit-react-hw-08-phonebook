@@ -1,25 +1,82 @@
+import './App.module.css';
+import React, { Suspense, lazy } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-// import { useState, useEffect } from "react";
-// import './App.module.css';
-// import { v4 as uuidv4 } from 'uuid';
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
-import { Filter } from './Filter/Filter';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import PublicRoute from './PublicRoute/PublicRoute';
+import { refreshUser } from 'redux/auth/operations';
+import { selectIsRefreshing } from 'redux/auth/selectors';
 
-import css from './App.module.css';
+const Home = lazy(() =>
+  import('../pages/Home.js' ),
+);
+const Register = lazy(() =>
+  import('../pages/Register.js'),
+);
+const Login = lazy(() =>
+  import('../pages/Login.js' ),
+);
+const Contacts = lazy(() =>
+  import('../pages/Contacts.js'),
+);
 
 export default function App() {
+  const dispatch = useDispatch();
+  const refreshing = useSelector(selectIsRefreshing);
+  console.log(refreshing);
 
   
-    return (
-      <>
-      <div className={css.container}>
-        <h1>Phonebook</h1>
-        <ContactForm/>
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-      </div>
-      </>
-    );
-  }
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return (
+   <div>
+      {refreshing ? (
+        <div>Loading...</div>
+      ) : (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <Home />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <PublicRoute restricted>
+                  <Register />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="login"
+              element={
+                <PublicRoute restricted redirectTo="/contacts">
+                  <Login />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="contacts"
+              element={
+                <PrivateRoute redirectTo="/login">
+                  <Contacts />
+                </PrivateRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to={'/'} />} />
+          </Routes>
+        </Suspense>
+      )}
+    </div>
+  );
+            }

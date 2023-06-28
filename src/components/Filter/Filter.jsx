@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import css from './Filter.module.css';
+// import css from './Filter.module.css';
 import { useDispatch } from "react-redux";
 import { filterContact } from 'redux/filterSlice';
+import { TextField, Typography, Box } from '@mui/material';
 const Filter = () => {
   const dispatch = useDispatch();
 
@@ -11,18 +12,20 @@ const Filter = () => {
   };
 
   return (
-    <>
-      <label className={css.inputLabel}>
-        <span className={css.label}>Find contacts by name</span>
-        <input
-          onChange={filterHandler}
-          type="text"
-          name="filter"
-          // value={value}
-          className={css.filterInput}
-        ></input>
-      </label>
-    </>
+    <Box sx={{ width: '350px' }}>
+      <Typography variant="body1" component="p">
+        Find contacts by name
+      </Typography>
+      <TextField
+        variant="outlined"
+        onChange={filterHandler}
+        type="text"
+        name="filter"
+        size="small"
+        margin="dense"
+        fullWidth
+      />
+    </Box>
   );
 };
 

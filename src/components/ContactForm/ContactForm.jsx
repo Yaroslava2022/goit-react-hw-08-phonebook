@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import { addContact } from 'redux/operations';
+import { addContact, replaceContacts } from 'redux/operations';
 import { useState } from "react";
-
+import { TextField, Button, Typography } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 
 import css from './ContactForm.module.css';
@@ -32,50 +32,74 @@ const ContactForm =() => {
     const isInContact = contacts.find(
       (cont) => cont.name.toLowerCase().trim() === nameInContact
     );
-    if (isInContact) {
-      alert(`${name} is already in contact`);
-      return;
-    }
-    dispatch(addContact({ name, number }));
+    const idInContacts = contacts
+    .filter(cont => cont.name.toLowerCase().trim() === nameInContact)
+    .map(cont => cont.id);
+  console.log(idInContacts[0]);
+  const id = idInContacts[0];
 
-    reset();
-  };
-    return (
-      <form onSubmit={handleOnSubmit} className={css.form}>
-        <label className={css.inputLabel}>
-          <span className={css.label}> Name</span>
-          <input
-            onChange={nameHandler}
-            type="name"
-            // name="name"
-            value={name}
-            className={css.nameInput}
-            required
-          ></input>
-        </label>
-        <label className={css.inputLabel}>
-          <span className={css.label}> Number</span>
-          <input
-            type="tel"
-            // name="number"
-            onChange={numberHandler}
-            value={number}
-            className={css.nameInput}
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-          />
-        </label>
-        <button type="submit" className={css.button}>
-          Add contact
-        </button>
-      </form>
+  if (isInContact) {
+    const needToReplace = window.confirm(
+      `${name} is already in contact,  do  you want to  replace ?`,
     );
+    if (needToReplace) {
+      console.log('patch');
+      dispatch(replaceContacts({ id, name, number }));
+      reset();
+    }
+    return;
   }
+  console.log('add');
+  dispatch(addContact({ name, number }));
+  reset();
+  };
+  return (
+    <form onSubmit={handleOnSubmit} className={css.form}>
+      <Typography> Name</Typography>
+      <TextField
+        fullWidth
+        autoComplete="off"
+        variant="outlined"
+        required
+        type="name"
+        value={name}
+        onChange={nameHandler}
+        size="small"
+        margin="normal"
+      />
 
+      <Typography> Number</Typography>
+      <TextField
+        fullWidth
+        autoComplete="off"
+        variant="outlined"
+        type="tel"
+        value={number}
+        placeholder="only numbers"
+        onChange={numberHandler}
+        inputProps={{
+          pattern: '[0-9]{9,13}',
+          title: 'Номер телефона должен состоять цифр из 9-13 цифр ',
+        }}
+        required
+        size="small"
+        margin="normal"
+      />
+      <Button
+        type="submit"
+        variant="contained"
+        size="small"
+        sx={{ width: 130 }}
+      >
+        Add contact
+      </Button>
+    </form>
+  );
+}
 
 ContactForm.propTypes = {
   onSubmit: PropTypes.func,
-  
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 export { ContactForm };

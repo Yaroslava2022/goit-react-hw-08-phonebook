@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import { ContactItem } from '../ContactItem/ContactItem';
-import css from './ContactList.module.css';
+// import css from './ContactList.module.css';
+import { List } from '@mui/material';
 
 import {
   getContacts,
@@ -28,15 +29,11 @@ const ContactList = () => {
   console.log(visibleContacts);
 
   return (
-    <ul className={css.list}>
-      {visibleContacts.map(({ id, name, phone }) => {
-        return (
-          <li key={id} className={css.item}>
-            <ContactItem name={name} number={phone} id={id} />
-          </li>
-        );
+    <List sx={{ width: '350px' }}>
+      {visibleContacts.map(({ id, name, number }) => {
+        return <ContactItem key={id} name={name} number={number} id={id} />;
       })}
-    </ul>
+    </List>
   );
 };
 ContactList.propTypes = {
