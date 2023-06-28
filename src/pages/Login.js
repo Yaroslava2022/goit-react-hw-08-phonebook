@@ -123,8 +123,7 @@ const Login = () => {
             LogIn
           </Button>
         </form>
-        {/* {!isLoggedIn ? (
-          <LoginGoogle /> ) : (<LogoutGoogle /> )} */}
+      
       </Container>
     </>
   );
