@@ -15,6 +15,7 @@ const ContactItem = ({ id, name, number }) => {
       <Typography>{`${name}:`}</Typography>
       <Typography sx={{ ml: '15px' }}>{number}</Typography>
       <Button
+      color= "error"
         endIcon={<DeleteIcon />}
         onClick={() => {
           deleteContacts(id);

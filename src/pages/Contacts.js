@@ -5,12 +5,15 @@ import { Heading } from 'components/Heading/Heading';
 import { ContainerBox } from 'components/Container/Container';
 import { Header } from 'components/Header/Header';
 
+
 const Contacts = () => {
   return (
     <>
       <Header />
       <ContainerBox>
         <Heading text="Phonebook" />
+       
+           
         <ContactForm />
         <Heading text="Contacts" />
         <Filter />

@@ -3,9 +3,12 @@ import { addContact, replaceContacts } from 'redux/operations';
 import { useState } from "react";
 import { TextField, Button, Typography } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+// import { brown } from '@mui/material/colors';
 
 import css from './ContactForm.module.css';
 
+// const color = brown[900];
 const ContactForm =() => {
   // state = { name: '', number: '' };
   const [name, setName] = useState('');
@@ -60,6 +63,7 @@ const ContactForm =() => {
         fullWidth
         autoComplete="off"
         variant="outlined"
+        color= "success"
         required
         type="name"
         value={name}
@@ -73,6 +77,7 @@ const ContactForm =() => {
         fullWidth
         autoComplete="off"
         variant="outlined"
+        color= "success"
         type="tel"
         value={number}
         placeholder="only numbers"
@@ -86,12 +91,14 @@ const ContactForm =() => {
         margin="normal"
       />
       <Button
+       color= "error"
         type="submit"
         variant="contained"
         size="small"
-        sx={{ width: 130 }}
+        sx={{ width: 150, gap: "5px"}}
       >
         Add contact
+        <PlaylistAddIcon sx={{ color: 'white' }} />
       </Button>
     </form>
   );

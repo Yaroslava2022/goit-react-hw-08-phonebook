@@ -17,8 +17,9 @@ const Home = () => {
           textAlign: 'center',
         }}
       >
-        <Typography variant="h4" sx={{ mt: '50px', fontWeight: '700' }}>
-          Hello, I`m your phonebook.
+        <Typography variant="h4" sx={{ mt: '50px', fontWeight: '700', marginBottom: "30px" }}>
+          Hello, I`m your phonebook!
+          
         </Typography>
         <Box
           sx={{
@@ -30,6 +31,7 @@ const Home = () => {
             borderRadius: '5%',
           }}
         />
+  
       </Container>
     </>
   );

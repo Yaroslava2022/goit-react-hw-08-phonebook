@@ -1,17 +1,18 @@
 import { useSelector } from 'react-redux';
-import { AppBar, Toolbar, IconButton, Box } from '@mui/material';
-import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
-import { NavLink } from 'react-router-dom';
+import { AppBar, Toolbar,  Box } from '@mui/material';
+// import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+// import { NavLink } from 'react-router-dom';
 import { Navigation } from '../Navigation/Navigation';
 import { MainNav } from '../MainNav/MainNav';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
-import css from '../MainNav/MainNav.module.css';
+// import css from '../MainNav/MainNav.module.css';
 
 export const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{background: "brown"}}>
+    
       <Toolbar
         sx={{
           display: 'flex',
@@ -20,14 +21,14 @@ export const Header = () => {
         }}
       >
         <Box>
-          <NavLink
+          {/* <NavLink
             to="/"
             className={({ isActive }) => (isActive ? css.activeLink : css.link)}
           >
             <IconButton>
               <ContactPhoneIcon sx={{ color: 'white' }} />
             </IconButton>
-          </NavLink>
+          </NavLink> */}
           <MainNav />
         </Box>
         {isLoggedIn ? <UserMenu /> : <Navigation />}

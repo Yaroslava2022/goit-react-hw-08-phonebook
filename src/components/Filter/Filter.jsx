@@ -20,6 +20,7 @@ const Filter = () => {
         variant="outlined"
         onChange={filterHandler}
         type="text"
+        color= "success"
         name="filter"
         size="small"
         margin="dense"

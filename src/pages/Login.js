@@ -74,6 +74,7 @@ const Login = () => {
             // error={email === ''}
             fullWidth
             variant="outlined"
+            color= "success"
             required
             type="email"
             value={email}
@@ -86,6 +87,7 @@ const Login = () => {
           <TextField
             fullWidth
             variant="outlined"
+            color= "success"
             required
             type={shownPassword ? 'text' : 'password'}
             value={password}
@@ -112,6 +114,7 @@ const Login = () => {
             }}
           />
           <Button
+          color= "error"
             type="submit"
             variant="contained"
             size="small"

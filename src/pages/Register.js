@@ -56,6 +56,7 @@ const Register = () => {
           <TextField
             fullWidth
             variant="outlined"
+            color= "success"
             required
             type="name"
             value={name}
@@ -67,6 +68,7 @@ const Register = () => {
           <TextField
             fullWidth
             variant="outlined"
+            color= "success"
             required
             type="email"
             value={email}
@@ -78,6 +80,7 @@ const Register = () => {
           <TextField
             fullWidth
             variant="outlined"
+            color= "success"
             required
             type="password"
             value={password}
@@ -87,6 +90,7 @@ const Register = () => {
             margin="normal"
           />
           <Button
+          color= "error"
             type="submit"
             variant="contained"
             size="small"
