@@ -6,7 +6,7 @@ import { Navigation } from '../Navigation/Navigation';
 import { MainNav } from '../MainNav/MainNav';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
-// import css from '../MainNav/MainNav.module.css';
+
 
 export const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -21,14 +21,7 @@ export const Header = () => {
         }}
       >
         <Box>
-          {/* <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? css.activeLink : css.link)}
-          >
-            <IconButton>
-              <ContactPhoneIcon sx={{ color: 'white' }} />
-            </IconButton>
-          </NavLink> */}
+          
           <MainNav />
         </Box>
         {isLoggedIn ? <UserMenu /> : <Navigation />}
